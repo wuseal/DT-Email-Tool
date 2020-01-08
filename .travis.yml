@@ -1,0 +1,40 @@
+language: python
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+    - os: osx
+      osx_image: xcode9.4
+      language: generic
+      env: TOXENV=py36
+      addons:
+        homebrew:
+          packages: python3.6
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p python3 ~/venv
+        - source ~/venv/bin/activate
+cache: pip
+install:
+  - pip install -r requirements.txt
+before_script:
+  - python CICDEnviromentScript.py ${tapd_user} ${tapd_password}
+script:
+  - pyinstaller -F -n dtemail ./wu/__main__.py
+after_success:
+  - |
+    case "${TRAVIS_OS_NAME}" in
+      osx)   export TARGET=macosx ;;
+      linux) export TARGET=linux ;;
+      *)     exit 1 ;;
+    esac
+  - cp dist/dtemail dtemail-${TARGET}
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: zhpPqkTMKLJLwEBgjLZr+Q2Z9e9DCjSLKIg745amEa0DXuy5dXtarWoV5WsSRRh/0gxG2qaZ4khO/imgH8Wp5dyIbw68PpLnl67777Mvsg2op32JHiSwbkDPDg+J4cjnGAoO3LMQPg5m3XdRIV1HjJKMetvv73Ocmrf6NvjFnwy3N97CXAY8Ha80QADkGNqGmF+YchyHVY6tAf6iGA8Ya0LOfMvcPfYSldNivhJQoZ8Y9AyV/NXYUTm4YZcPrpaii1o2xVV8+vPzlsOuzfJHE9GNd9fo8/6xIZbvuRJJ/L7GLfXvcc3GQgvj5vKbE03FOfLkuiU+Ud5vxG3OmhKB4CVA3Zc328pMyx95o4CLdsY1aUJ4d3KES3amZZD70/XGgwab46wX/y/hq5xhHBcWUAH5VwsqnnT5L/HqrOoSDOg/0h0dEZPFuqWOmP+AYTXVi6a91yiNoocUZhjpUyF/GyX3eDhui/nzVLTJRNDw8ESlJHmwduuZvrCmV7h7CByERRc89ZrM7/QNE25ggT/Weq6wYr16k/ZOtD1EVLUaMBjJeV4pLWnvZvcHLK+KfGrlHN4Glhc9t/rWZJ/Tes05ypt3Uo7XvLwufVb4lK5KrOgTKxBXc5j+1XS3r6uc7gy1NZUrgxuAA2nC+nBUAk5fc1FDOgSAI8D9hhU0z0U/aY0=
+  file: dtemail-${TARGET}
+  on:
+    tags: true
+    repo: wuseal/DT-Email-Tool
