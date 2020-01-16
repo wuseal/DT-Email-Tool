@@ -24,6 +24,8 @@ class Utils:
             return "Dingtone"
         elif "telos" in branch_name.lower():
             return "Telos"
+        elif "number" in branch_name.lower():
+            return "2nd Number"
         else:
             return "TalkU"
 
@@ -41,7 +43,11 @@ class Utils:
         return f"{main_version}.{minor_version}.{micro_version}"
 
     def getAPKLink(self, branch_name: str):
-        return self.__apk_link_template.replace("{app_name_lower_case}", self.getAppName(branch_name).lower()).replace(
+        app_name = self.getAppName(branch_name).lower()
+        if app_name.__contains__("number"):
+            # 2nd Number在Jenkins打好包的下载链接对应的应用名字是number，所以这里替换下
+            app_name = "number"
+        return self.__apk_link_template.replace("{app_name_lower_case}", app_name).replace(
             "{branch_name}", branch_name.lower()).replace("{app_version}", self.getAppVersion(branch_name))
 
     def __get_current_iteration_id(selfs, branch_name: str):
@@ -96,6 +102,19 @@ class Utils:
             app_version_code_line = app_info.split("\n")[1]
             app_version_code = app_version_code_line.split("=")[1].strip()
             return app_version_code
+        elif app_name.lower() == "2nd number":
+            get_file_url = """http://10.88.0.31/api/v3/projects/107/repository/files?private_token=%s&file_path=DingtoneAndroid/config.gradle&ref=%s""" % (
+                git_lab_access_token, branch_name)
+            __content: str = str(base64.b64decode(json.loads(requests.get(get_file_url).text)['content']))
+            left = __content.index("number")
+            right = __content.rindex(r"}")
+            content = __content[left:right].replace(r"\n", "")
+            configs = content.split("] ")
+            # 配置文件里的app name是number所以这里要使用number这个字符查找version code的值
+            config_app_name = "number"
+            for each in configs:
+                if config_app_name in each.lower():
+                    return each[each.index(":") + 1:each.index(",")].strip()
         else:
             get_file_url = """http://10.88.0.31/api/v3/projects/4/repository/files?private_token=%s&file_path=DingtoneAndroid/config.gradle&ref=%s""" % (
                 git_lab_access_token, branch_name)
