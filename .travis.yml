@@ -9,14 +9,16 @@ matrix:
       env: TOXENV=py36
       addons:
         homebrew:
-          packages: python3.6
+          packages:
+            - python3
       before_install:
         - pip3 install virtualenv
         - virtualenv -p python3 ~/venv
         - source ~/venv/bin/activate
-cache: pip
 install:
   - pip install -r requirements.txt
+#  此处需要加下面一行，不然Travis打出来的包不能运行：https://github.com/pypa/setuptools/issues/1963
+  - pip install --upgrade 'setuptools<45.0.0'
 before_script:
   - python CICDEnviromentScript.py ${tapd_user} ${tapd_password}
 script:
