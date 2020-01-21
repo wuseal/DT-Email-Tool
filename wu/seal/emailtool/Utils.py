@@ -17,7 +17,6 @@ class Utils:
     __apk_link_template = """http://10.88.0.44/{app_name_lower_case}_{branch_name}/pn1/{app_version}/index.html"""
     __iteration_item_story_link_template = """https://www.tapd.cn/33700533/prong/stories/view/{story_id}"""
     __iteration_item_bug_link_template = """https://www.tapd.cn/33700533/bugtrace/bugs/view?bug_id={story_id}"""
-    __iteration_bug_list_link_template = """https://m.tapd.cn/33700533/nwx/iteration/cgi_list_workitems/{iteration_id}/bug"""
 
     def getAppName(self, branch_name: str):
         if "dingtone" in branch_name.lower():
@@ -165,7 +164,7 @@ class Utils:
         self.__logger.info("抓取到的版本迭代对应的缺陷列表为：%s" % __json)
         for item in __json['data']:
             item_name = item["Bug"]['title']
-            item_link = self.__iteration_item_story_link_template.replace('{story_id}', item["Bug"]['id'])
+            item_link = self.__iteration_item_bug_link_template.replace('{story_id}', item["Bug"]['id'])
             items.append(Item(item_name, item_link))
 
 
