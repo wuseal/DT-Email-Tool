@@ -14,7 +14,7 @@ from wu.seal.emailtool.TAPD_Constant import tapd_api_user, tapd_api_password
 
 class Utils:
     __logger = logging.getLogger('Utils')
-    __apk_link_template = """http://10.88.0.44/{app_name_lower_case}_{branch_name}/pn1/{app_version}/index.html"""
+    __apk_link_template = """http://10.88.0.132/{app_name_lower_case}_{branch_name}/pn1/{app_version}/index.html"""
     __iteration_item_story_link_template = """https://www.tapd.cn/33700533/prong/stories/view/{story_id}"""
     __iteration_item_bug_link_template = """https://www.tapd.cn/33700533/bugtrace/bugs/view?bug_id={story_id}"""
 
