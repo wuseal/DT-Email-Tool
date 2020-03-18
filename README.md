@@ -10,4 +10,4 @@
 * Mac OSX
 * Linux
 
-进入Github Release 界面即可下载相应系统支持的版本
+进入[Github Release](https://github.com/wuseal/DT-Email-Tool/releases) 界面即可下载相应系统支持的版本
