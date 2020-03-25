@@ -27,7 +27,6 @@ build_script:
 after_build:
   - cp dist\dtemail.exe ..\dtemail-windows.exe
   - cd ..
-  - "%PYTHON%\\python.exe wu\\seal\\emailtool\\Utils.py"
 
 artifacts:
   - path: dtemail-windows.exe
