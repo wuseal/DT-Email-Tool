@@ -88,7 +88,7 @@ class Utils:
         app_name = self.getAppName(branch_name)
         git_lab_access_token = """U4E2RNTg5Aobk3NUUs-K"""
         if app_name.lower() == "telos":
-            get_file_url = """http://10.88.0.31/api/v3/projects/4/repository/files?private_token=%s&file_path=DingtoneAndroid/build.gradle&ref=%s""" % (
+            get_file_url = """http://10.88.0.31/api/v3/projects/121/repository/files?private_token=%s&file_path=build.gradle&ref=%s""" % (
                 git_lab_access_token, branch_name)
             responseContentText = requests.get(get_file_url).text
             loadedJSON = json.loads(responseContentText)
@@ -170,5 +170,5 @@ class Utils:
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    result = Utils().get_iteration_story_items("Telos_2_0_0")
+    result = Utils().get_app_version_code("telos_2_1_7")
     print(result)
