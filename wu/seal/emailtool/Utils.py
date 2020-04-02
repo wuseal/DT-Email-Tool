@@ -115,7 +115,7 @@ class Utils:
                 if config_app_name in each.lower():
                     return each[each.index(":") + 1:each.index(",")].strip()
         else:
-            get_file_url = """http://10.88.0.31/api/v3/projects/4/repository/files?private_token=%s&file_path=DingtoneAndroid/config.gradle&ref=%s""" % (
+            get_file_url = """http://10.88.0.31/api/v3/projects/4/repository/files?private_token=%s&file_path=config.gradle&ref=%s""" % (
                 git_lab_access_token, branch_name)
             __content: str = str(base64.b64decode(json.loads(requests.get(get_file_url).text)['content']))
             left = __content.index("talku")
