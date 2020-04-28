@@ -102,7 +102,7 @@ class Utils:
             app_version_code = app_version_code_line.split("=")[1].strip()
             return app_version_code
         elif app_name.lower() == "2nd number":
-            get_file_url = """http://10.88.0.31/api/v3/projects/107/repository/files?private_token=%s&file_path=DingtoneAndroid/config.gradle&ref=%s""" % (
+            get_file_url = """http://10.88.0.31/api/v3/projects/107/repository/files?private_token=%s&file_path=config.gradle&ref=%s""" % (
                 git_lab_access_token, branch_name)
             __content: str = str(base64.b64decode(json.loads(requests.get(get_file_url).text)['content']))
             left = __content.index("number")
