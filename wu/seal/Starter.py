@@ -6,7 +6,7 @@ from wu.seal.emailtool.EmailTool import send_publish_notify_email, send_version_
 
 def __get_test_tip(is_in_test_model):
     if is_in_test_model:
-        return "\n------当前为测试模式，所有邮件均会只发送到'seal.wu@dingtone.me'不会发送到其它人------"
+        return "\n------当前为测试模式，所有邮件均会只发送到'alpha.li@dingtone.me'不会发送到其它人------"
     else:
         return "t -> 开启测试模式"
 

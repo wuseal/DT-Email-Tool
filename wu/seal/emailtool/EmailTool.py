@@ -85,7 +85,7 @@ def send_version_commit_request_email(branch_name: str, test=False):
     to_address_list = ['nick.huang@dingtone.me', 'liang.chen@dingtone.me']
     cc_address_list = ['cpl@dingtone.me', 'teresa.gao@dingtone.me', 'neville.chen@dingtone.me',
                        'aaron.zhang@dingtone.me', 'grissom.xue@dingtone.me','kimi.li@dingtone.me']
-    to_address_list_test = ['seal.wu@dingtone.me']
+    to_address_list_test = ['alpha.li@dingtone.me']
     cc_address_list_test = []
     if test:
         sendEmail(subject, to_address_list_test, cc_address_list_test, html_body)
@@ -121,7 +121,7 @@ def send_publish_notify_email(branch_name: str, open_rate: str = '2%', test=Fals
                        'csqa@dingtone.me', 'kimi.li@dingtone.me','esther.zong@dingtone.me',
                        'coopy.zhou@dingtone.me','abel.li@dingtone.me','locke.meng@dingtone.me']
 
-    to_address_list_test = ['seal.wu@dingtone.me']
+    to_address_list_test = ['alpha.li@dingtone.me']
     cc_address_list_test = []
     if test:
         sendEmail(subject, to_address_list_test, cc_address_list_test, html_body)
@@ -130,4 +130,6 @@ def send_publish_notify_email(branch_name: str, open_rate: str = '2%', test=Fals
 
 
 if __name__ == '__main__':
-    send_publish_notify_email("Telos_2_0_0", test=True)
+    # authontic_work_flow()
+    send_publish_notify_email("dingtone_4_15_1", test=True)
+    # printInboxMessage()
