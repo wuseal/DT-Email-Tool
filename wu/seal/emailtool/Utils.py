@@ -25,6 +25,8 @@ class Utils:
             return "Telos"
         elif "number" in branch_name.lower():
             return "2nd Number"
+        elif "fax" in branch_name.lower():
+            return "fax"
         else:
             return "TalkU"
 
